@@ -1,18 +1,9 @@
-# Optimus Lead — Landing
+# Optimus Lead — Landing (fixed)
 
-Next.js (App Router) + Tailwind + Framer Motion.
+Fixes:
+- Removed stray backslash at top of `app/page.jsx`
+- Corrected CSS import path in `app/layout.jsx`
 
-## Commands
-
-```bash
+## Build
 npm install
-npm run dev
-# build:
-npm run build && npm start
-```
-
-## Structure
-
-- `app/layout.jsx`: root layout + global CSS import
-- `app/page.jsx`: bilingual landing (FR/EN), testimonials, offers, offer details, single FAQ, CTA
-- `app/globals.css`: Tailwind base
+npm run build

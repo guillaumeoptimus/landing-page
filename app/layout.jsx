@@ -3,7 +3,7 @@ export const metadata = {
   description: "External Sales Director & Outbound machine for small teams"
 };
 
-import "../app/globals.css";
+import "./globals.css";
 
 export default function RootLayout({ children }) {
   return (

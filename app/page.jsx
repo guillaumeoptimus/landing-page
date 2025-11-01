@@ -1,4 +1,3 @@
-\
 "use client";
 
 import React, { useState } from "react";
@@ -223,12 +222,6 @@ const palette = {
   accentTo: "to-orange-600",
 };
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-};
-const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.08 } } };
-
 function UIPreview() {
   return (
     <div className="relative w-full">
@@ -272,25 +265,13 @@ function UIPreview() {
           </div>
         </div>
       </div>
-      <div className="pointer-events-none absolute -left-6 -top-6 hidden select-none md:block">
-        <div className="rounded-xl border bg-white/90 px-4 py-3 shadow-sm">
-          <p className="text-xs text-gray-500">Quick Action</p>
-          <p className="text-sm font-medium">Launch Sequence</p>
-        </div>
-      </div>
-      <div className="pointer-events-none absolute -right-6 -bottom-6 hidden select-none md:block">
-        <div className="rounded-xl border bg-white/90 px-4 py-3 shadow-sm">
-          <p className="text-xs text-gray-500">Next Meeting</p>
-          <p className="text-sm font-medium">Tomorrow 10:00</p>
-        </div>
-      </div>
     </div>
   );
 }
 
 function TestimonialCard({ q }) {
   return (
-    <motion.div variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
+    <motion.div initial={{opacity:0,y:16}} animate={{opacity:1,y:0}} transition={{duration:0.6,ease:"easeOut"}}
       className="rounded-2xl border p-5 bg-white/90 hover:-translate-y-1 hover:shadow-md transition">
       <div className="flex items-center gap-2 text-amber-500" aria-label="rating">
         {Array.from({ length: 5 }).map((_, i) => (<Star key={i} className="w-4 h-4 fill-current" />))}
@@ -343,13 +324,6 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      {/* Background */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-40 -left-40 h-[420px] w-[420px] rounded-full bg-gradient-to-br from-emerald-200 via-lime-200 to-amber-200 opacity-50 blur-3xl" />
-        <div className="absolute -bottom-40 -right-24 h-[360px] w-[360px] rounded-full bg-gradient-to-tr from-amber-200 via-orange-200 to-lime-200 opacity-40 blur-3xl" />
-      </div>
-
-      {/* Navbar */}
       <header className="sticky top-0 z-30 backdrop-blur bg-white/70 border-b">
         <div className="max-w-6xl mx-auto grid grid-cols-3 items-center px-4 py-3">
           <div className="flex items-center gap-2">
@@ -370,52 +344,40 @@ export default function Landing() {
         </div>
       </header>
 
-      {/* Hero */}
       <section id="home" className="max-w-6xl mx-auto grid items-center gap-10 px-4 pt-16 pb-12 md:grid-cols-2">
-        <motion.div variants={stagger} initial="hidden" animate="show">
-          <motion.span variants={fadeInUp}
-            className="inline-flex items-center gap-2 text-xs font-medium bg-emerald-50 text-emerald-700 rounded-full px-3 py-1 border border-emerald-100">
+        <div>
+          <span className="inline-flex items-center gap-2 text-xs font-medium bg-emerald-50 text-emerald-700 rounded-full px-3 py-1 border border-emerald-100">
             <Star className="w-3.5 h-3.5" /> {t.hero.badge}
-          </motion.span>
-          <motion.h1 variants={fadeInUp} className="text-4xl md:text-5xl font-bold mt-4 leading-tight tracking-tight">{t.hero.title}</motion.h1>
-          <motion.p variants={fadeInUp} className="mt-4 text-gray-600 max-w-xl">{t.hero.subtitle}</motion.p>
-          <motion.div variants={fadeInUp} className="mt-6 flex flex-wrap gap-3">
+          </span>
+          <h1 className="text-4xl md:text-5xl font-bold mt-4 leading-tight tracking-tight">{t.hero.title}</h1>
+          <p className="mt-4 text-gray-600 max-w-xl">{t.hero.subtitle}</p>
+          <div className="mt-6 flex flex-wrap gap-3">
             <a href="#contact" className={`inline-flex items-center gap-2 bg-gradient-to-r ${palette.primaryFrom} ${palette.primaryTo} text-white px-5 py-3 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-[2px] transition`}>
               {t.hero.ctaPrimary} <ArrowRight className="w-4 h-4" />
             </a>
             <a href="#offers" className="inline-flex items-center gap-2 border px-5 py-3 rounded-2xl hover:bg-white/70 hover:shadow-sm transition">
               {t.hero.ctaSecondary}
             </a>
-          </motion.div>
-        </motion.div>
-        <motion.div variants={fadeInUp} initial="hidden" animate="show" className="relative">
+          </div>
+        </div>
+        <div className="relative">
           <UIPreview />
-        </motion.div>
+        </div>
       </section>
 
-      {/* Testimonials */}
       <section className="max-w-6xl mx-auto px-4 py-10">
-        <motion.h2 variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-3xl font-semibold">
-          {t.testimonials.title}
-        </motion.h2>
+        <h2 className="text-3xl font-semibold">{t.testimonials.title}</h2>
         <div className="mt-6 grid gap-5 md:grid-cols-3">
           {t.testimonials.quotes.map((q, i) => (<TestimonialCard q={q} key={i} />))}
         </div>
       </section>
 
-      {/* Offers */}
       <section id="offers" className="max-w-6xl mx-auto px-4 py-14">
-        <motion.h2 variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-3xl font-semibold">
-          {t.offers.title}
-        </motion.h2>
-        <motion.p variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="mt-2 text-gray-600 max-w-2xl">
-          {t.offers.intro}
-        </motion.p>
-
+        <h2 className="text-3xl font-semibold">{t.offers.title}</h2>
+        <p className="mt-2 text-gray-600 max-w-2xl">{t.offers.intro}</p>
         <div className="mt-8 grid md:grid-cols-3 gap-6">
           {t.offers.cards.map((c, idx) => (
-            <motion.div key={idx} variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}
-              className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-emerald-200 via-amber-200 to-lime-200">
+            <div key={idx} className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-emerald-200 via-amber-200 to-lime-200">
               <div className="rounded-2xl bg-white/90 p-5 shadow-sm transition group-hover:-translate-y-1 group-hover:shadow-md">
                 <div className="pointer-events-none absolute -right-2 -top-2 h-10 w-10 rotate-45 rounded-md bg-gradient-to-br from-emerald-500 to-lime-500 opacity-10" />
                 <div className="flex items-center justify-between">
@@ -438,14 +400,14 @@ export default function Landing() {
                 <ul className="mt-4 grid grid-cols-1 gap-2 text-sm md:grid-cols-1">
                   {c.bullets.map((b, i) => (
                     <li key={i} className="flex items-start gap-2">
-                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100">{iconFor(b)}</span>
+                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100"><Check className="h-3.5 w-3.5"/></span>
                       <span>{b}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="mt-5 flex items-center justify-between">
                   <a href={c.href} className="inline-flex items-center gap-2 border px-4 py-2 rounded-xl hover:bg-emerald-50 hover:border-emerald-200 transition">
-                    { "Voir le détail" } <ArrowRight className="w-4 h-4" />
+                    {"Voir le détail"} <ArrowRight className="w-4 h-4" />
                   </a>
                   <div className="hidden md:flex items-center gap-2 text-[11px] text-gray-500">
                     <span className="inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -454,204 +416,20 @@ export default function Landing() {
                 </div>
               </div>
               <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 blur-xl transition group-hover:opacity-40 bg-gradient-to-br from-emerald-300 via-amber-300 to-lime-300" />
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* Offer detail: Setup Sprint */}
-      <section id="offer-setup" className="max-w-6xl mx-auto px-4 py-12">
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl border bg-white/90 shadow-sm">
-          <div className="bg-gradient-to-r from-emerald-600 via-lime-600 to-amber-500 px-6 py-5 text-white">
-            <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-semibold tracking-tight">Mise en place (Setup Sprint)</h3>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs">
-                <span className="h-2 w-2 rounded-full bg-white"/> Sprint 2–3 semaines
-              </span>
-            </div>
-          </div>
-          <div className="p-6 md:p-8">
-            <p className="text-gray-700 max-w-3xl">Installer une machine outbound opérationnelle en 2–3 semaines, documentée et prête à tourner.</p>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {["Prêt à lancer","Process documenté","Stack minimal"].map((chip, i) => (
-                <div key={i} className="flex items-center gap-2 rounded-xl border bg-white/70 px-4 py-3">
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-600 to-lime-600 text-white text-xs font-semibold">{i+1}</span>
-                  <span className="text-sm font-medium">{chip}</span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
-              <div className="rounded-2xl border p-5">
-                <h4 className="font-medium">Résultats attendus</h4>
-                <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                  {[
-                    "ICP/actionnables + listes de cibles prioritaires",
-                    "Séquences multicanales prêtes (email/LinkedIn/call)",
-                    "Infra email propre, domaines & tracking configurés",
-                    "Dashboard de suivi minimal viable"
-                  ].map((item,i)=> (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100">{iconFor(item)}</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-2xl border p-5">
-                <h4 className="font-medium">Délivrables</h4>
-                <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                  {[
-                    "Doc ICP & messaging (Notion/PDF)",
-                    "Templates & scripts (email/call/DM)",
-                    "Playbook d’opération (runbook 1.0)",
-                    "Checklist technique (SPF/DKIM/DMARC)"
-                  ].map((item,i)=> (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-amber-50 text-amber-700 border border-amber-100">{iconFor(item)}</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="mt-6 grid gap-6 md:grid-cols-3">
-              <div className="rounded-2xl border p-5">
-                <h4 className="font-medium">Timeline</h4>
-                <div className="mt-3">
-                  <div className="h-2 w-full rounded-full bg-emerald-100">
-                    <div className="h-2 w-1/3 rounded-full bg-gradient-to-r from-emerald-600 to-amber-500" />
-                  </div>
-                  <p className="mt-2 text-sm text-gray-700">S1: ICP & messages · S2: setup & templates · S3: tests</p>
-                </div>
-              </div>
-              <div className="rounded-2xl border p-5">
-                <h4 className="font-medium">Ce qu’on attend de vous</h4>
-                <ul className="mt-2 space-y-2 text-sm text-gray-700">
-                  {[ "1 point de contact & 1h/sem", "Accès outils existants", "Feedback rapide" ].map((item,i)=> (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-lime-50 text-lime-700 border border-lime-100">{iconFor(item)}</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-2xl border p-5 bg-gradient-to-br from-white to-emerald-50/50">
-                <h4 className="font-medium">Note</h4>
-                <p className="mt-2 text-sm text-gray-700">Stack limitée, tout documenté. Objectif : autonomie à la fin du sprint.</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Offer detail: Development */}
-      <section id="offer-development" className="max-w-6xl mx-auto px-4 py-12">
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl border bg-white/90 shadow-sm">
-          <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-lime-600 px-6 py-5 text-white">
-            <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-semibold tracking-tight">Développement (Run & Optimisation)</h3>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs">
-                <span className="h-2 w-2 rounded-full bg-white"/> Ops continues
-              </span>
-            </div>
-          </div>
-          <div className="p-6 md:p-8">
-            <p className="text-gray-700 max-w-3xl">Exécution continue des campagnes, qualification et prise de RDV. Amélioration hebdo basée sur les chiffres.</p>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {["+ RDV qualifiés","Apprentissages rapides","Rythme simple & mesurable"].map((chip, i) => (
-                <div key={i} className="flex items-center gap-2 rounded-xl border bg-white/70 px-4 py-3">
-                  <span className="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 text-white text-xs font-semibold">{i+1}</span>
-                  <span className="text-sm font-medium">{chip}</span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
-              <div className="rounded-2xl border p-5">
-                <h4 className="font-medium">Résultats attendus</h4>
-                <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                  {[
-                    "Pipeline qui progresse chaque semaine",
-                    "RDV qualifiés pour l’équipe",
-                    "Apprentissage rapide sur copies & canaux"
-                  ].map((item,i)=> (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-emerald-50 text-emerald-700 border border-emerald-100">{iconFor(item)}</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-2xl border p-5">
-                <h4 className="font-medium">Délivrables récurrents</h4>
-                <ul className="mt-3 space-y-2 text-sm text-gray-700">
-                  {[
-                    "Listes de leads sourcées & enrichies",
-                    "Campagnes lancées + ajustements",
-                    "Reporting hebdo & synthèse des tests"
-                  ].map((item,i)=> (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-md bg-amber-50 text-amber-700 border border-amber-100">{iconFor(item)}</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="mt-6 grid gap-6 md:grid-cols-3">
-              <div className="rounded-2xl border p-5">
-                <h4 className="font-medium">Rituels</h4>
-                <p className="mt-2 text-sm text-gray-700">Point 30 min / semaine · revues mensuelles · objectifs trimestriels.</p>
-              </div>
-              <div className="rounded-2xl border p-5">
-                <h4 className="font-medium">Stack</h4>
-                <p className="mt-2 text-sm text-gray-700">Email + LinkedIn + call. Outils légers documentés.</p>
-              </div>
-              <div className="rounded-2xl border p-5 bg-gradient-to-br from-white to-amber-50/50">
-                <h4 className="font-medium">Note</h4>
-                <p className="mt-2 text-sm text-gray-700">Rythme simple, mesurable ; on itère sur ce qui marche.</p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Offer detail: Fractional Sales Director */}
-      <section id="offer-fsd" className="max-w-6xl mx-auto px-4 py-12">
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl border bg-white/90 shadow-sm">
-          <div className="bg-gradient-to-r from-lime-600 via-emerald-600 to-amber-500 px-6 py-5 text-white">
-            <div className="flex items-center justify-between">
-              <h3 className="text-2xl font-semibold tracking-tight">Direction Commerciale Externalisée</h3>
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 text-xs">
-                <span className="h-2 w-2 rounded-full bg-white"/> Leadership & closing
-              </span>
-            </div>
-          </div>
-          <div className="p-6 md:p-8">
-            <p className="text-gray-700 max-w-3xl">Pilotage stratégique & opérationnel avec objectifs clairs, rituels d’équipe et support au closing.</p>
-            <div className="mt-4 rounded-2xl border p-5 bg-white/80">
-              <p className="text-sm text-gray-700">Détails complets sur demande (adapté à votre organisation et à vos objectifs).</p>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Global FAQ (single) */}
       <section id="faq" className="max-w-6xl mx-auto px-4 py-12">
-        <motion.h2 variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true }} className="text-3xl font-semibold">
-          {t.faq.title}
-        </motion.h2>
+        <h2 className="text-3xl font-semibold">{t.faq.title}</h2>
         <div className="mt-6 grid gap-3 md:grid-cols-2">
           {t.faq.items.map((it, i) => (<FAQItem key={i} item={it} idx={i} />))}
         </div>
       </section>
 
-      {/* CTA */}
       <section id="contact" className="max-w-6xl mx-auto px-4 py-16">
-        <motion.div variants={fadeInUp} initial="hidden" whileInView="show" viewport={{ once: true }}
-          className="rounded-3xl border p-8 md:p-10 text-center bg-white/80">
+        <div className="rounded-3xl border p-8 md:p-10 text-center bg-white/80">
           <h3 className="text-3xl font-semibold tracking-tight">{t.cta.title}</h3>
           <p className="mt-2 text-gray-600 max-w-2xl mx-auto">{t.cta.subtitle}</p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
@@ -664,10 +442,9 @@ export default function Landing() {
               <Mail className="w-4 h-4"/> {t.cta.secondary}
             </a>
           </div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* Footer */}
       <footer className="border-t py-8 bg-white/70 backdrop-blur">
         <div className="max-w-6xl mx-auto px-4 text-sm text-gray-600 grid grid-cols-1 md:grid-cols-2 items-center">
           <p className="order-2 md:order-1 mt-3 md:mt-0">{t.footer.text}</p>
