@@ -1,9 +1,15 @@
-# Optimus Lead — Landing (fixed)
+# Optimus Lead — Aurora Theme
+New polished theme (indigo/sky primary, fuchsia/violet accent). Text unchanged.
 
-Fixes:
-- Removed stray backslash at top of `app/page.jsx`
-- Corrected CSS import path in `app/layout.jsx`
+## Replace these files in your repo:
+- `app/page.jsx`
+- `app/layout.jsx`
+- `app/globals.css`
+- `tailwind.config.js`
+- `postcss.config.js` (if needed)
 
-## Build
-npm install
+Then:
+```bash
+npm i
 npm run build
+```

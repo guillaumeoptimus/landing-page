@@ -1,10 +1,8 @@
 export const metadata = {
   title: "Optimus Lead",
-  description: "External Sales Director & Outbound machine for small teams"
+  description: "External Sales Director & Outbound machine for small teams",
 };
-
 import "./globals.css";
-
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
