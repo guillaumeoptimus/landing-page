@@ -1,1 +1,1 @@
-# Aurora Light theme + Methodology section\nReplace app/* files and configs, then `npm i && npm run build`.
+Optimus Lead Aurora Light fixed theme
